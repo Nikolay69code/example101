@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ЕГЭ по истории - Тренажер</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="https://hammerjs.github.io/dist/hammer.min.js"></script>
+</head>
+<body>
+    <div class="splash-screen">
+        <div class="splash-content">
+            <div class="logo-container">
+                <img src="images/logo.png" alt="История ЕГЭ" class="logo-image">
+            </div>
+            <h1 class="splash-title">Подготовка к ЕГЭ по истории</h1>
+            <p class="splash-description">Тренажер для эффективной подготовки к экзамену</p>
+            <button class="start-btn">Начать подготовку</button>
+        </div>
+    </div>
+
+    <div class="app-container" style="display: none;">
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+        <div class="cards-container">
+            <div class="swipe-hint">Смахните вниз для следующего вопроса</div>
+            <div class="cards-stack"></div>
+        </div>
+        <div class="result-panel" style="display: none;">
+            <h2>Результаты</h2>
+            <div class="stats"></div>
+            <button class="restart-btn">Начать заново</button>
+        </div>
+    </div>
+    <script src="js/history-data.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
