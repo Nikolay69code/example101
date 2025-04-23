@@ -76,19 +76,47 @@ body {
 
 .progress-bar {
     width: 100%;
-    height: 6px;
-    background-color: #ddd;
-    border-radius: 3px;
+    height: 8px;
+    background-color: rgba(221, 221, 221, 0.3);
+    border-radius: 4px;
     margin-bottom: 20px;
     position: relative;
     z-index: 2;
+    overflow: hidden;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .progress-fill {
     height: 100%;
-    background-color: #4CAF50;
-    border-radius: 3px;
-    transition: width 0.3s ease;
+    background: linear-gradient(90deg, #4CAF50, #45a049);
+    border-radius: 4px;
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.3) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
 }
 
 .cards-container {
@@ -109,11 +137,11 @@ body {
     left: 0;
     width: 100%;
     height: calc(100% - 60px);
-    background-color: white;
+    background: linear-gradient(to bottom, #ffffff, #f8f9fa);
     border-radius: 20px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    transition: transform 0.5s ease, opacity 0.5s ease;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
     cursor: grab;
     overflow-y: auto;
 }
@@ -158,22 +186,24 @@ body {
 }
 
 .option-btn {
-    background-color: #fff;
+    background: linear-gradient(to bottom, #ffffff, #f8f8f8);
     border: 2px solid #ddd;
     padding: 15px;
     border-radius: 12px;
     text-align: left;
     font-size: 16px;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .option-btn:hover:not(:disabled) {
-    background-color: #f8f8f8;
+    background: linear-gradient(to bottom, #f8f8f8, #f2f2f2);
     border-color: #999;
     transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .option-btn.selected {
@@ -181,13 +211,15 @@ body {
 }
 
 .option-btn.correct {
-    background-color: #E8F5E9;
+    background: linear-gradient(to bottom, #E8F5E9, #C8E6C9);
     border-color: #4CAF50;
+    box-shadow: 0 2px 8px rgba(76, 175, 80, 0.2);
 }
 
 .option-btn.incorrect {
-    background-color: #FFEBEE;
+    background: linear-gradient(to bottom, #FFEBEE, #FFCDD2);
     border-color: #F44336;
+    box-shadow: 0 2px 8px rgba(244, 67, 54, 0.2);
 }
 
 .option-btn:disabled {
@@ -302,4 +334,23 @@ body {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+.progress-counter {
+    text-align: center;
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+.session-stats {
+    background-color: rgba(33, 150, 243, 0.1);
+    border-radius: 6px;
+    padding: 8px 12px;
+    margin: 10px 0;
+    color: #1565C0;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
 }

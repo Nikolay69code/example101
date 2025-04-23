@@ -108,6 +108,16 @@ function handleAnswer(button, question) {
     resultMessage.className = `result-message ${isCorrect ? 'correct' : 'incorrect'}`;
     resultMessage.textContent = isCorrect ? 'Правильно! 🎉' : 'Неправильно! ❌';
 
+    // Добавляем статистику текущей сессии
+    const sessionStats = document.createElement('div');
+    sessionStats.className = 'session-stats';
+    const correctAnswers = userAnswers.filter((answer, idx) => 
+        answer !== null && selectedQuestions[idx].options[answer].isCorrect
+    ).length;
+    const totalAnswered = userAnswers.filter(answer => answer !== null).length;
+    const sessionAccuracy = Math.round((correctAnswers / totalAnswered) * 100);
+    sessionStats.textContent = `Точность: ${sessionAccuracy}% (${correctAnswers}/${totalAnswered})`;
+
     const explanation = document.createElement('div');
     explanation.className = 'explanation';
     
@@ -127,6 +137,7 @@ function handleAnswer(button, question) {
     swipeInstruction.textContent = 'Свайпните вверх для перехода к следующему заданию';
 
     resultContainer.appendChild(resultMessage);
+    resultContainer.appendChild(sessionStats);
     resultContainer.appendChild(explanation);
     resultContainer.appendChild(swipeInstruction);
 
@@ -152,7 +163,21 @@ function nextQuestion() {
 
 function updateProgress() {
     const progress = ((currentQuestionIndex + 1) / selectedQuestions.length) * 100;
-    document.querySelector('.progress-fill').style.width = `${progress}%`;
+    const progressFill = document.querySelector('.progress-fill');
+    progressFill.style.width = `${progress}%`;
+
+    // Добавляем счетчик прогресса
+    const progressCounter = document.createElement('div');
+    progressCounter.className = 'progress-counter';
+    progressCounter.textContent = `${currentQuestionIndex + 1} из ${selectedQuestions.length} (${Math.round(progress)}%)`;
+    
+    // Удаляем предыдущий счетчик, если он есть
+    const oldCounter = document.querySelector('.progress-counter');
+    if (oldCounter) {
+        oldCounter.remove();
+    }
+    
+    document.querySelector('.progress-bar').after(progressCounter);
 }
 
 function showResults() {
